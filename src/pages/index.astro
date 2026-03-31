@@ -41,7 +41,7 @@ const otherProjects = projects.filter(p => !p.data.featured);
           description={project.data.description}
           image={project.data.image}
           technologies={project.data.technologies}
-          slug={project.slug}
+          slug={project.id}
           featured={project.data.featured}
         />
       ))}
