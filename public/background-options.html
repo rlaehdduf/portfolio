@@ -498,10 +498,11 @@
       width: 100%;
       height: 100%;
       background-image: 
-        linear-gradient(rgba(100, 116, 139, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(100, 116, 139, 0.15) 1px, transparent 1px);
-      background-size: 40px 40px;
+        linear-gradient(rgba(100, 116, 139, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100, 116, 139, 0.2) 1px, transparent 1px);
+      background-size: 30px 30px;
       background-position: 0 0, 0 0;
+      opacity: 1;
     }
 
     .bg-7 {
@@ -846,25 +847,157 @@
         portfolioPreview.classList.add('bg-' + option);
       }
 
-      // 카드 스타일 조정 (오피스 화이트일 때)
+      // 배경별 UI 색상 테마
+      const themeColors = {
+        1: { // 다크 블루 그라데이션
+          cardBg: 'rgba(30, 41, 59, 0.7)',
+          cardBorder: 'rgba(51, 65, 85, 0.5)',
+          headerBg: 'rgba(30, 41, 59, 0.95)',
+          footerBg: 'rgba(30, 41, 59, 0.9)',
+          text: '#f8fafc',
+          textMuted: '#94a3b8',
+          badge: 'rgba(37, 99, 235, 0.3)',
+          badgeText: '#60a5fa'
+        },
+        2: { // 미드나잇 퍼플
+          cardBg: 'rgba(48, 43, 99, 0.7)',
+          cardBorder: 'rgba(78, 72, 128, 0.5)',
+          headerBg: 'rgba(48, 43, 99, 0.95)',
+          footerBg: 'rgba(48, 43, 99, 0.9)',
+          text: '#f8fafc',
+          textMuted: '#a5b4fc',
+          badge: 'rgba(99, 102, 241, 0.3)',
+          badgeText: '#818cf8'
+        },
+        3: { // 네이비 패턴
+          cardBg: 'rgba(22, 33, 62, 0.7)',
+          cardBorder: 'rgba(48, 63, 111, 0.5)',
+          headerBg: 'rgba(22, 33, 62, 0.95)',
+          footerBg: 'rgba(22, 33, 62, 0.9)',
+          text: '#f8fafc',
+          textMuted: '#93c5fd',
+          badge: 'rgba(37, 99, 235, 0.3)',
+          badgeText: '#60a5fa'
+        },
+        4: { // 오로라
+          cardBg: 'rgba(30, 41, 59, 0.7)',
+          cardBorder: 'rgba(51, 65, 85, 0.5)',
+          headerBg: 'rgba(30, 41, 59, 0.95)',
+          footerBg: 'rgba(30, 41, 59, 0.9)',
+          text: '#f8fafc',
+          textMuted: '#94a3b8',
+          badge: 'rgba(37, 99, 235, 0.4)',
+          badgeText: '#60a5fa'
+        },
+        5: { // 퍼플 레인
+          cardBg: 'rgba(102, 126, 234, 0.3)',
+          cardBorder: 'rgba(139, 92, 246, 0.5)',
+          headerBg: 'rgba(102, 126, 234, 0.8)',
+          footerBg: 'rgba(118, 75, 162, 0.8)',
+          text: '#ffffff',
+          textMuted: '#e9d5ff',
+          badge: 'rgba(255, 255, 255, 0.3)',
+          badgeText: '#ffffff'
+        },
+        6: { // 오피스 화이트
+          cardBg: 'rgba(30, 41, 59, 0.9)',
+          cardBorder: 'rgba(100, 116, 139, 0.4)',
+          headerBg: 'rgba(30, 41, 59, 0.95)',
+          footerBg: 'rgba(30, 41, 59, 0.95)',
+          text: '#f8fafc',
+          textMuted: '#94a3b8',
+          badge: 'rgba(37, 99, 235, 0.4)',
+          badgeText: '#60a5fa'
+        },
+        7: { // 다크 그레이
+          cardBg: 'rgba(67, 67, 67, 0.7)',
+          cardBorder: 'rgba(100, 100, 100, 0.5)',
+          headerBg: 'rgba(67, 67, 67, 0.95)',
+          footerBg: 'rgba(0, 0, 0, 0.9)',
+          text: '#f8fafc',
+          textMuted: '#94a3b8',
+          badge: 'rgba(100, 100, 100, 0.4)',
+          badgeText: '#d1d5db'
+        },
+        8: { // 메탈릭
+          cardBg: 'rgba(65, 67, 69, 0.7)',
+          cardBorder: 'rgba(100, 103, 106, 0.5)',
+          headerBg: 'rgba(35, 37, 38, 0.95)',
+          footerBg: 'rgba(65, 67, 69, 0.9)',
+          text: '#f8fafc',
+          textMuted: '#94a3b8',
+          badge: 'rgba(100, 103, 106, 0.4)',
+          badgeText: '#d1d5db'
+        }
+      };
+
+      const theme = themeColors[option];
+      
+      // 카드 스타일 조정
       const cards = document.querySelectorAll('.preview-card');
-      if (option === 6) {
-        // 오피스 화이트 - 어두운 카드
-        cards.forEach(card => {
-          card.style.background = 'rgba(30, 41, 59, 0.9)';
-          card.style.borderColor = 'rgba(100, 116, 139, 0.3)';
-        });
-        document.getElementById('previewHeader').style.background = 'rgba(30, 41, 59, 0.95)';
-        document.getElementById('previewFooter').style.background = 'rgba(30, 41, 59, 0.9)';
-      } else {
-        // 다크 테마 - 밝은 카드
-        cards.forEach(card => {
-          card.style.background = 'rgba(30, 41, 59, 0.6)';
-          card.style.borderColor = 'rgba(51, 65, 85, 0.5)';
-        });
-        document.getElementById('previewHeader').style.background = 'rgba(30, 41, 59, 0.95)';
-        document.getElementById('previewFooter').style.background = 'rgba(30, 41, 59, 0.9)';
+      cards.forEach(card => {
+        card.style.background = theme.cardBg;
+        card.style.borderColor = theme.cardBorder;
+      });
+
+      // 섹션별 스타일 조정
+      const header = document.getElementById('previewHeader');
+      const hero = document.getElementById('previewHero');
+      const featured = document.getElementById('previewFeatured');
+      const all = document.getElementById('previewAll');
+      const footer = document.getElementById('previewFooter');
+
+      if (header) {
+        header.style.background = theme.headerBg;
+        header.style.borderBottomColor = theme.cardBorder;
       }
+
+      if (hero) {
+        hero.style.color = theme.text;
+      }
+
+      if (hero) {
+        const heroP = hero.querySelector('p');
+        if (heroP) heroP.style.color = theme.textMuted;
+      }
+
+      if (featured) {
+        const title = featured.querySelector('.preview-section-title');
+        if (title) {
+          title.style.color = theme.text;
+        }
+      }
+
+      if (all) {
+        const title = all.querySelector('.preview-section-title');
+        if (title) {
+          title.style.color = theme.text;
+        }
+      }
+
+      if (footer) {
+        footer.style.background = theme.footerBg;
+        footer.style.borderTopColor = theme.cardBorder;
+        const footerP = footer.querySelector('p');
+        if (footerP) footerP.style.color = theme.textMuted;
+      }
+
+      // 카드 타이틀 색상
+      const cardTitles = document.querySelectorAll('.preview-card-title');
+      cardTitles.forEach(title => {
+        title.style.color = theme.text;
+      });
+
+      // 배지 스타일
+      const badges = document.querySelectorAll('.preview-tech-badge');
+      badges.forEach(badge => {
+        badge.style.background = theme.badge;
+        badge.style.color = theme.badgeText;
+      });
+
+      // 로고 색상
+      const logo = document.querySelector('.preview-logo');
+      if (logo) logo.style.color = theme.text;
     }
 
     function openPreview(option) {
