@@ -20,8 +20,14 @@
 
     h1 {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       font-size: 2rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #94a3b8;
+      margin-bottom: 2rem;
     }
 
     .options-grid {
@@ -37,11 +43,17 @@
       overflow: hidden;
       border: 2px solid #333;
       transition: transform 0.2s, border-color 0.2s;
+      cursor: pointer;
     }
 
     .option-card:hover {
       transform: translateY(-4px);
       border-color: #2563eb;
+    }
+
+    .option-card.selected {
+      border-color: #2563eb;
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
     }
 
     .preview {
@@ -53,6 +65,7 @@
       font-size: 1.5rem;
       font-weight: bold;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      position: relative;
     }
 
     .option-info {
@@ -69,23 +82,132 @@
       color: #94a3b8;
       font-size: 0.9rem;
       line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.5rem;
     }
 
     .btn {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      background: #2563eb;
-      color: white;
+      flex: 1;
+      padding: 0.75rem 1rem;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.9rem;
-      transition: background 0.2s;
+      transition: all 0.2s;
     }
 
-    .btn:hover {
+    .btn-preview {
+      background: #475569;
+      color: white;
+    }
+
+    .btn-preview:hover {
+      background: #64748b;
+    }
+
+    .btn-apply {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn-apply:hover {
       background: #3b82f6;
+    }
+
+    /* Full Screen Preview Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .modal.open {
+      display: block;
+    }
+
+    .modal-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .modal-content::before {
+      content: '배경 미리보기';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      z-index: 1001;
+      pointer-events: none;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: rgba(0,0,0,0.7);
+      border: 2px solid white;
+      border-radius: 50%;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 1002;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.1);
+    }
+
+    .modal-info {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      text-align: center;
+      z-index: 1002;
+      max-width: 90%;
+    }
+
+    .modal-info h3 {
+      color: #60a5fa;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-info p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      justify-content: center;
     }
 
     /* Background Styles */
@@ -93,14 +215,14 @@
       background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
     }
 
-    .bg-1::before {
+    .bg-1::after {
       content: '';
       position: absolute;
       width: 100%;
       height: 100%;
       background: 
-        radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.3) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.4) 0%, transparent 50%);
     }
 
     .bg-2 {
@@ -111,20 +233,28 @@
       background: linear-gradient(45deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     }
 
-    .bg-3::before {
+    .bg-3::after {
       content: '';
       position: absolute;
       width: 100%;
       height: 100%;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
     }
 
     .bg-4 {
       background: #000000;
-      background-image: 
-        radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.5) 0%, transparent 50%),
-        radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.4) 0%, transparent 40%),
-        radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.4) 0%, transparent 40%);
+    }
+
+    .bg-4::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.5) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.5) 0%, transparent 40%);
     }
 
     .bg-5 {
@@ -133,9 +263,16 @@
 
     .bg-6 {
       background: #0f172a;
+    }
+
+    .bg-6::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
       background-image: 
-        radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-        radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+        radial-gradient(rgba(255,255,255,0.15) 1.5px, transparent 1.5px),
+        radial-gradient(rgba(255,255,255,0.15) 1.5px, transparent 1.5px);
       background-size: 50px 50px;
       background-position: 0 0, 25px 25px;
     }
@@ -148,149 +285,261 @@
       background: linear-gradient(to bottom, #232526, #414345);
     }
 
-    .wrapper {
-      position: relative;
-      height: 100%;
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 3rem;
+      color: #60a5fa;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <h1>🎨 포트폴리오 배경 옵션</h1>
+  <p class="subtitle">카드를 클릭하면 전체 화면 미리보기를 볼 수 있습니다</p>
   
   <div class="options-grid">
     <!-- Option 1 -->
-    <div class="option-card">
-      <div class="preview bg-1 wrapper">
+    <div class="option-card" data-bg="1" onclick="openPreview(1)">
+      <div class="preview bg-1">
         <span>Option 1</span>
       </div>
       <div class="option-info">
         <h3>다크 블루 그라데이션</h3>
         <p>진한 남색에서 보라색으로 부드럽게 전환. 세련되고 전문적인 느낌.</p>
-        <button class="btn" onclick="applyBg(1)">적용하기</button>
+        <div class="btn-group">
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(1)">미리보기</button>
+          <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(1)">적용하기</button>
+        </div>
       </div>
     </div>
 
     <!-- Option 2 -->
-    <div class="option-card">
-      <div class="preview bg-2 wrapper">
+    <div class="option-card" data-bg="2" onclick="openPreview(2)">
+      <div class="preview bg-2">
         <span>Option 2</span>
       </div>
       <div class="option-info">
         <h3>미드나잇 퍼플</h3>
         <p>깊은 보라색 계열의 우아한 그라데이션.</p>
-        <button class="btn" onclick="applyBg(2)">적용하기</button>
+        <div class="btn-group">
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(2)">미리보기</button>
+          <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(2)">적용하기</button>
+        </div>
       </div>
     </div>
 
     <!-- Option 3 -->
-    <div class="option-card">
-      <div class="preview bg-3 wrapper">
+    <div class="option-card" data-bg="3" onclick="openPreview(3)">
+      <div class="preview bg-3">
         <span>Option 3</span>
       </div>
       <div class="option-info">
         <h3>네이비 패턴</h3>
         <p>남색 그라데이션에 미묘한 기하학적 패턴 추가.</p>
-        <button class="btn" onclick="applyBg(3)">적용하기</button>
+        <div class="btn-group">
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(3)">미리보기</button>
+          <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(3)">적용하기</button>
+        </div>
       </div>
     </div>
 
     <!-- Option 4 -->
-    <div class="option-card">
-      <div class="preview bg-4 wrapper">
+    <div class="option-card" data-bg="4" onclick="openPreview(4)">
+      <div class="preview bg-4">
         <span>Option 4</span>
       </div>
       <div class="option-info">
         <h3>오로라</h3>
         <p>검은 배경에 푸른빛의 오로라 같은 그라데이션.</p>
-        <button class="btn" onclick="applyBg(4)">적용하기</button>
+        <div class="btn-group">
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(4)">미리보기</button>
+          <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(4)">적용하기</button>
+        </div>
       </div>
     </div>
 
     <!-- Option 5 -->
-    <div class="option-card">
-      <div class="preview bg-5 wrapper">
+    <div class="option-card" data-bg="5" onclick="openPreview(5)">
+      <div class="preview bg-5">
         <span>Option 5</span>
       </div>
       <div class="option-info">
         <h3>퍼플 레인</h3>
         <p>밝은 퍼플 그라데이션. 활기찬 느낌.</p>
-        <button class="btn" onclick="applyBg(5)">적용하기</button>
+        <div class="btn-group">
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(5)">미리보기</button>
+          <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(5)">적용하기</button>
+        </div>
       </div>
     </div>
 
     <!-- Option 6 -->
-    <div class="option-card">
-      <div class="preview bg-6 wrapper">
+    <div class="option-card" data-bg="6" onclick="openPreview(6)">
+      <div class="preview bg-6">
         <span>Option 6</span>
       </div>
       <div class="option-info">
         <h3>도트 그리드</h3>
         <p>다크 배경에 규칙적인 도트 패턴.</p>
-        <button class="btn" onclick="applyBg(6)">적용하기</button>
+        <div class="btn-group">
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(6)">미리보기</button>
+          <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(6)">적용하기</button>
+        </div>
       </div>
     </div>
 
     <!-- Option 7 -->
-    <div class="option-card">
-      <div class="preview bg-7 wrapper">
+    <div class="option-card" data-bg="7" onclick="openPreview(7)">
+      <div class="preview bg-7">
         <span>Option 7</span>
       </div>
       <div class="option-info">
         <h3>다크 그레이</h3>
         <p>단순하고 깔끔한 회색 그라데이션.</p>
-        <button class="btn" onclick="applyBg(7)">적용하기</button>
+        <div class="btn-group">
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(7)">미리보기</button>
+          <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(7)">적용하기</button>
+        </div>
       </div>
     </div>
 
     <!-- Option 8 -->
-    <div class="option-card">
-      <div class="preview bg-8 wrapper">
+    <div class="option-card" data-bg="8" onclick="openPreview(8)">
+      <div class="preview bg-8">
         <span>Option 8</span>
       </div>
       <div class="option-info">
         <h3>메탈릭</h3>
         <p>금속 질감의 세련된 그레이.</p>
-        <button class="btn" onclick="applyBg(8)">적용하기</button>
+        <div class="btn-group">
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(8)">미리보기</button>
+          <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(8)">적용하기</button>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Full Screen Modal -->
+  <div class="modal" id="previewModal">
+    <div class="modal-content" id="modalContent">
+      <button class="modal-close" onclick="closePreview()">&times;</button>
+      <div class="modal-info">
+        <h3 id="modalTitle">배경 옵션</h3>
+        <p id="modalDesc">설명</p>
+        <div class="modal-actions">
+          <button class="btn btn-apply" id="modalApplyBtn">적용하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="/" class="back-link">← 포트폴리오로 돌아가기</a>
+
   <script>
-    function applyBg(option) {
-      const css = getBgCSS(option);
-      navigator.clipboard.writeText(css).then(() => {
-        alert(`Option ${option} CSS 가 클립보드에 복사되었습니다!\n\nPortfolio BaseLayout.astro 에 붙여넣으세요.`);
+    const bgData = {
+      1: {
+        name: '다크 블루 그라데이션',
+        desc: '진한 남색에서 보라색으로 부드럽게 전환. 세련되고 전문적인 느낌.',
+        css: 'background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);\nbackground-attachment: fixed;'
+      },
+      2: {
+        name: '미드나잇 퍼플',
+        desc: '깊은 보라색 계열의 우아한 그라데이션.',
+        css: 'background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);\nbackground-attachment: fixed;'
+      },
+      3: {
+        name: '네이비 패턴',
+        desc: '남색 그라데이션에 미묘한 기하학적 패턴 추가.',
+        css: 'background: linear-gradient(45deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);\nbackground-attachment: fixed;'
+      },
+      4: {
+        name: '오로라',
+        desc: '검은 배경에 푸른빛의 오로라 같은 그라데이션.',
+        css: 'background: #000000;\nbackground-image: \n  radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.6) 0%, transparent 50%),\n  radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.5) 0%, transparent 40%);\nbackground-attachment: fixed;'
+      },
+      5: {
+        name: '퍼플 레인',
+        desc: '밝은 퍼플 그라데이션. 활기찬 느낌.',
+        css: 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\nbackground-attachment: fixed;'
+      },
+      6: {
+        name: '도트 그리드',
+        desc: '다크 배경에 규칙적인 도트 패턴.',
+        css: 'background: #0f172a;\nbackground-image: \n  radial-gradient(rgba(255,255,255,0.15) 1.5px, transparent 1.5px),\n  radial-gradient(rgba(255,255,255,0.15) 1.5px, transparent 1.5px);\nbackground-size: 50px 50px;\nbackground-position: 0 0, 25px 25px;\nbackground-attachment: fixed;'
+      },
+      7: {
+        name: '다크 그레이',
+        desc: '단순하고 깔끔한 회색 그라데이션.',
+        css: 'background: linear-gradient(to right, #434343 0%, #000000 100%);\nbackground-attachment: fixed;'
+      },
+      8: {
+        name: '메탈릭',
+        desc: '금속 질감의 세련된 그레이.',
+        css: 'background: linear-gradient(to bottom, #232526, #414345);\nbackground-attachment: fixed;'
+      }
+    };
+
+    let currentBg = null;
+
+    function openPreview(option) {
+      currentBg = option;
+      const modal = document.getElementById('previewModal');
+      const modalContent = document.getElementById('modalContent');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalApplyBtn = document.getElementById('modalApplyBtn');
+
+      // Set background
+      modalContent.className = 'modal-content bg-' + option;
+      
+      // Set info
+      modalTitle.textContent = bgData[option].name;
+      modalDesc.textContent = bgData[option].desc;
+      modalApplyBtn.onclick = () => applyBg(option);
+
+      // Open modal
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+
+      // Update selected card
+      document.querySelectorAll('.option-card').forEach(card => {
+        card.classList.remove('selected');
       });
+      document.querySelector(`[data-bg="${option}"]`).classList.add('selected');
     }
 
-    function getBgCSS(option) {
-      const css = {
-        1: `background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
-background-attachment: fixed;`,
-        2: `background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-background-attachment: fixed;`,
-        3: `background: linear-gradient(45deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-background-attachment: fixed;`,
-        4: `background: #000000;
-background-image: 
-  radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.5) 0%, transparent 50%),
-  radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.4) 0%, transparent 40%);
-background-attachment: fixed;`,
-        5: `background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-background-attachment: fixed;`,
-        6: `background: #0f172a;
-background-image: 
-  radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-  radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
-background-size: 50px 50px;
-background-position: 0 0, 25px 25px;
-background-attachment: fixed;`,
-        7: `background: linear-gradient(to right, #434343 0%, #000000 100%);
-background-attachment: fixed;`,
-        8: `background: linear-gradient(to bottom, #232526, #414345);
-background-attachment: fixed;`
-      };
-      return css[option];
+    function closePreview() {
+      const modal = document.getElementById('previewModal');
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      currentBg = null;
+    }
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closePreview();
+      }
+    });
+
+    // Close modal on clicking outside content
+    document.getElementById('previewModal').addEventListener('click', (e) => {
+      if (e.target.id === 'previewModal') {
+        closePreview();
+      }
+    });
+
+    function applyBg(option) {
+      const css = bgData[option].css;
+      navigator.clipboard.writeText(css).then(() => {
+        alert(`Option ${option} - ${bgData[option].name}\n\nCSS 가 클립보드에 복사되었습니다!\n\nPortfolio BaseLayout.astro 에 붙여넣으세요.`);
+      });
     }
   </script>
 </body>
