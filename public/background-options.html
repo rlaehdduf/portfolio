@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Background Options</title>
+  <title>Portfolio Background & Layout Options</title>
   <style>
     * {
       margin: 0;
@@ -27,15 +27,24 @@
     .subtitle {
       text-align: center;
       color: #94a3b8;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
     }
 
+    .section-title {
+      font-size: 1.5rem;
+      margin: 3rem 0 1.5rem 0;
+      color: #60a5fa;
+      border-left: 4px solid #2563eb;
+      padding-left: 1rem;
+    }
+
+    /* Background Options Grid */
     .options-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
       max-width: 1400px;
-      margin: 0 auto;
+      margin: 0 auto 3rem auto;
     }
 
     .option-card {
@@ -57,30 +66,31 @@
     }
 
     .preview {
-      height: 250px;
+      height: 200px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: bold;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
       position: relative;
     }
 
     .option-info {
-      padding: 1.5rem;
+      padding: 1.25rem;
       background: #1e293b;
     }
 
     .option-info h3 {
       margin-bottom: 0.5rem;
       color: #60a5fa;
+      font-size: 1rem;
     }
 
     .option-info p {
       color: #94a3b8;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       line-height: 1.5;
       margin-bottom: 1rem;
     }
@@ -92,11 +102,11 @@
 
     .btn {
       flex: 1;
-      padding: 0.75rem 1rem;
+      padding: 0.625rem 1rem;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       transition: all 0.2s;
     }
 
@@ -140,20 +150,6 @@
       left: 0;
       width: 100%;
       height: 100%;
-    }
-
-    .modal-content::before {
-      content: '배경 미리보기';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      font-weight: bold;
-      color: white;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-      z-index: 1001;
-      pointer-events: none;
     }
 
     .modal-close {
@@ -208,6 +204,237 @@
       gap: 1rem;
       margin-top: 1rem;
       justify-content: center;
+    }
+
+    /* Portfolio Structure Preview */
+    .portfolio-preview {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 3px solid #333;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .portfolio-preview * {
+      transition: all 0.3s ease;
+    }
+
+    /* Preview Header */
+    .preview-header {
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .preview-logo {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #f8fafc;
+    }
+
+    .preview-menu {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .preview-menu-icon {
+      width: 25px;
+      height: 3px;
+      background: #f8fafc;
+      border-radius: 2px;
+      margin: 3px 0;
+    }
+
+    /* Preview Hero */
+    .preview-hero {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .preview-hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #f8fafc;
+    }
+
+    .preview-hero p {
+      color: #94a3b8;
+      font-size: 1.25rem;
+    }
+
+    /* Preview Featured */
+    .preview-section {
+      padding: 2rem;
+    }
+
+    .preview-section-title {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .preview-card {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+      border-radius: 8px;
+      padding: 1rem;
+      min-height: 120px;
+    }
+
+    .preview-card.featured {
+      border-color: #2563eb;
+      position: relative;
+    }
+
+    .preview-card.featured::before {
+      content: '⭐';
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .preview-card-title {
+      font-size: 0.9rem;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+
+    .preview-card-tech {
+      display: flex;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+    }
+
+    .preview-tech-badge {
+      font-size: 0.65rem;
+      padding: 0.125rem 0.5rem;
+      background: rgba(37, 99, 235, 0.3);
+      color: #60a5fa;
+      border-radius: 10px;
+    }
+
+    /* Preview Footer */
+    .preview-footer {
+      padding: 1.5rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .preview-footer p {
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+
+    /* Layout Options */
+    .layout-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .layout-card {
+      background: #1e293b;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid #333;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .layout-card:hover {
+      border-color: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    .layout-card.selected {
+      border-color: #10b981;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .layout-preview {
+      height: 150px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .layout-header {
+      height: 30px;
+      background: #0f172a;
+      border-radius: 4px;
+    }
+
+    .layout-hero {
+      height: 40px;
+      background: rgba(37, 99, 235, 0.3);
+      border-radius: 4px;
+    }
+
+    .layout-featured {
+      flex: 1;
+      background: rgba(30, 41, 59, 0.5);
+      border: 2px dashed rgba(37, 99, 235, 0.5);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      font-size: 0.75rem;
+    }
+
+    .layout-footer {
+      height: 20px;
+      background: #0f172a;
+      border-radius: 4px;
+    }
+
+    .layout-info {
+      padding: 1rem;
+      border-top: 1px solid #333;
+    }
+
+    .layout-info h4 {
+      color: #60a5fa;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .layout-info p {
+      color: #94a3b8;
+      font-size: 0.75rem;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1rem;
+      color: #60a5fa;
+      text-decoration: none;
+      font-size: 1rem;
+      background: #1e293b;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .back-link:hover {
+      background: #334155;
     }
 
     /* Background Styles */
@@ -271,8 +498,8 @@
       width: 100%;
       height: 100%;
       background-image: 
-        linear-gradient(rgba(100, 116, 139, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(100, 116, 139, 0.1) 1px, transparent 1px);
+        linear-gradient(rgba(100, 116, 139, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100, 116, 139, 0.15) 1px, transparent 1px);
       background-size: 40px 40px;
       background-position: 0 0, 0 0;
     }
@@ -285,35 +512,29 @@
       background: linear-gradient(to bottom, #232526, #414345);
     }
 
-    .back-link {
-      display: block;
-      text-align: center;
-      margin-top: 3rem;
-      color: #60a5fa;
-      text-decoration: none;
-      font-size: 1rem;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
+    .wrapper {
+      position: relative;
+      height: 100%;
     }
   </style>
 </head>
 <body>
-  <h1>🎨 포트폴리오 배경 옵션</h1>
-  <p class="subtitle">카드를 클릭하면 전체 화면 미리보기를 볼 수 있습니다</p>
+  <h1>🎨 포트폴리오 디자인 옵션</h1>
+  <p class="subtitle">배경과 레이아웃을 선택하고 실시간으로 미리보세요</p>
   
+  <!-- 배경 옵션 -->
+  <h2 class="section-title">1. 배경 스타일 선택</h2>
   <div class="options-grid">
     <!-- Option 1 -->
     <div class="option-card" data-bg="1" onclick="openPreview(1)">
-      <div class="preview bg-1">
-        <span>Option 1</span>
+      <div class="preview bg-1 wrapper">
+        <span>다크 블루 그라데이션</span>
       </div>
       <div class="option-info">
         <h3>다크 블루 그라데이션</h3>
         <p>진한 남색에서 보라색으로 부드럽게 전환. 세련되고 전문적인 느낌.</p>
         <div class="btn-group">
-          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(1)">미리보기</button>
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(1)">전체보기</button>
           <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(1)">적용하기</button>
         </div>
       </div>
@@ -321,14 +542,14 @@
 
     <!-- Option 2 -->
     <div class="option-card" data-bg="2" onclick="openPreview(2)">
-      <div class="preview bg-2">
-        <span>Option 2</span>
+      <div class="preview bg-2 wrapper">
+        <span>미드나잇 퍼플</span>
       </div>
       <div class="option-info">
         <h3>미드나잇 퍼플</h3>
         <p>깊은 보라색 계열의 우아한 그라데이션.</p>
         <div class="btn-group">
-          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(2)">미리보기</button>
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(2)">전체보기</button>
           <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(2)">적용하기</button>
         </div>
       </div>
@@ -336,14 +557,14 @@
 
     <!-- Option 3 -->
     <div class="option-card" data-bg="3" onclick="openPreview(3)">
-      <div class="preview bg-3">
-        <span>Option 3</span>
+      <div class="preview bg-3 wrapper">
+        <span>네이비 패턴</span>
       </div>
       <div class="option-info">
         <h3>네이비 패턴</h3>
         <p>남색 그라데이션에 미묘한 기하학적 패턴 추가.</p>
         <div class="btn-group">
-          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(3)">미리보기</button>
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(3)">전체보기</button>
           <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(3)">적용하기</button>
         </div>
       </div>
@@ -351,14 +572,14 @@
 
     <!-- Option 4 -->
     <div class="option-card" data-bg="4" onclick="openPreview(4)">
-      <div class="preview bg-4">
-        <span>Option 4</span>
+      <div class="preview bg-4 wrapper">
+        <span>오로라</span>
       </div>
       <div class="option-info">
         <h3>오로라</h3>
         <p>검은 배경에 푸른빛의 오로라 같은 그라데이션.</p>
         <div class="btn-group">
-          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(4)">미리보기</button>
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(4)">전체보기</button>
           <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(4)">적용하기</button>
         </div>
       </div>
@@ -366,14 +587,14 @@
 
     <!-- Option 5 -->
     <div class="option-card" data-bg="5" onclick="openPreview(5)">
-      <div class="preview bg-5">
-        <span>Option 5</span>
+      <div class="preview bg-5 wrapper">
+        <span>퍼플 레인</span>
       </div>
       <div class="option-info">
         <h3>퍼플 레인</h3>
         <p>밝은 퍼플 그라데이션. 활기찬 느낌.</p>
         <div class="btn-group">
-          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(5)">미리보기</button>
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(5)">전체보기</button>
           <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(5)">적용하기</button>
         </div>
       </div>
@@ -381,14 +602,14 @@
 
     <!-- Option 6 -->
     <div class="option-card" data-bg="6" onclick="openPreview(6)">
-      <div class="preview bg-6">
-        <span>Option 6</span>
+      <div class="preview bg-6 wrapper">
+        <span>오피스 화이트</span>
       </div>
       <div class="option-info">
         <h3>오피스 화이트</h3>
         <p>밝은 회색 그라데이션에 격자 패턴. 깔끔하고 전문적인 오피스 분위기.</p>
         <div class="btn-group">
-          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(6)">미리보기</button>
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(6)">전체보기</button>
           <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(6)">적용하기</button>
         </div>
       </div>
@@ -396,14 +617,14 @@
 
     <!-- Option 7 -->
     <div class="option-card" data-bg="7" onclick="openPreview(7)">
-      <div class="preview bg-7">
-        <span>Option 7</span>
+      <div class="preview bg-7 wrapper">
+        <span>다크 그레이</span>
       </div>
       <div class="option-info">
         <h3>다크 그레이</h3>
         <p>단순하고 깔끔한 회색 그라데이션.</p>
         <div class="btn-group">
-          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(7)">미리보기</button>
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(7)">전체보기</button>
           <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(7)">적용하기</button>
         </div>
       </div>
@@ -411,16 +632,129 @@
 
     <!-- Option 8 -->
     <div class="option-card" data-bg="8" onclick="openPreview(8)">
-      <div class="preview bg-8">
-        <span>Option 8</span>
+      <div class="preview bg-8 wrapper">
+        <span>메탈릭</span>
       </div>
       <div class="option-info">
         <h3>메탈릭</h3>
         <p>금속 질감의 세련된 그레이.</p>
         <div class="btn-group">
-          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(8)">미리보기</button>
+          <button class="btn btn-preview" onclick="event.stopPropagation(); openPreview(8)">전체보기</button>
           <button class="btn btn-apply" onclick="event.stopPropagation(); applyBg(8)">적용하기</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 포트폴리오 구조 미리보기 -->
+  <h2 class="section-title">2. 실시간 구조 미리보기</h2>
+  <div class="portfolio-preview" id="portfolioPreview">
+    <!-- Header -->
+    <div class="preview-header" id="previewHeader">
+      <div class="preview-logo">Portfolio</div>
+      <div class="preview-menu">
+        <div class="preview-menu-icon"></div>
+        <div class="preview-menu-icon"></div>
+        <div class="preview-menu-icon"></div>
+      </div>
+    </div>
+    
+    <!-- Hero -->
+    <div class="preview-hero" id="previewHero">
+      <h2>My Projects</h2>
+      <p>Unity Games, Web Applications, and Tools</p>
+    </div>
+    
+    <!-- Featured Projects -->
+    <div class="preview-section" id="previewFeatured">
+      <div class="preview-section-title">⭐ Featured Projects</div>
+      <div class="preview-grid">
+        <div class="preview-card featured">
+          <div class="preview-card-title">DefenceGame</div>
+          <div class="preview-card-tech">
+            <span class="preview-tech-badge">Unity</span>
+            <span class="preview-tech-badge">C#</span>
+          </div>
+        </div>
+        <div class="preview-card featured">
+          <div class="preview-card-title">GreedDungeon</div>
+          <div class="preview-card-tech">
+            <span class="preview-tech-badge">Unity</span>
+            <span class="preview-tech-badge">Roguelite</span>
+          </div>
+        </div>
+        <div class="preview-card featured">
+          <div class="preview-card-title">GameDevToolkit</div>
+          <div class="preview-card-tech">
+            <span class="preview-tech-badge">Package</span>
+            <span class="preview-tech-badge">Unity</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- All Projects -->
+    <div class="preview-section" id="previewAll">
+      <div class="preview-section-title">📋 All Projects</div>
+      <div class="preview-grid">
+        <div class="preview-card">
+          <div class="preview-card-title">Pathfinder</div>
+          <div class="preview-card-tech">
+            <span class="preview-tech-badge">Metroidvania</span>
+          </div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-title">ShotUp</div>
+          <div class="preview-card-tech">
+            <span class="preview-tech-badge">Physics</span>
+          </div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-title">Cookie Clicker</div>
+          <div class="preview-card-tech">
+            <span class="preview-tech-badge">Node.js</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="preview-footer" id="previewFooter">
+      <p>Personal Portfolio © 2026</p>
+    </div>
+  </div>
+
+  <!-- 레이아웃 옵션 -->
+  <h2 class="section-title">3. 레이아웃 옵션 (준비중)</h2>
+  <div class="layout-options">
+    <div class="layout-card" onclick="selectLayout(1)">
+      <div class="layout-preview">
+        <div class="layout-header"></div>
+        <div class="layout-hero"></div>
+        <div class="layout-featured">Featured (3 cards)</div>
+        <div class="layout-footer"></div>
+      </div>
+      <div class="layout-info">
+        <h4>Standard</h4>
+        <p>기본 2 섹션 레이아웃</p>
+      </div>
+    </div>
+    
+    <div class="layout-card" onclick="selectLayout(2)">
+      <div class="layout-preview">
+        <div class="layout-header"></div>
+        <div class="layout-hero" style="height: 60px;"></div>
+        <div class="layout-featured" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+          <div style="background: rgba(37,99,235,0.2);"></div>
+          <div style="background: rgba(37,99,235,0.2);"></div>
+          <div style="background: rgba(37,99,235,0.2);"></div>
+          <div style="background: rgba(37,99,235,0.2);"></div>
+        </div>
+        <div class="layout-footer"></div>
+      </div>
+      <div class="layout-info">
+        <h4>Grid (Coming Soon)</h4>
+        <p>4 컬럼 그리드 레이아웃</p>
       </div>
     </div>
   </div>
@@ -471,7 +805,7 @@
       6: {
         name: '오피스 화이트',
         desc: '밝은 회색 그라데이션에 격자 패턴. 깔끔하고 전문적인 오피스 분위기.',
-        css: 'background: linear-gradient(180deg, #f5f7fa 0%, #e4e8ec 100%);\nbackground-image: \n  linear-gradient(rgba(100, 116, 139, 0.1) 1px, transparent 1px),\n  linear-gradient(90deg, rgba(100, 116, 139, 0.1) 1px, transparent 1px);\nbackground-size: 40px 40px;\nbackground-attachment: fixed;'
+        css: 'background: linear-gradient(180deg, #f5f7fa 0%, #e4e8ec 100%);\nbackground-image: \n  linear-gradient(rgba(100, 116, 139, 0.15) 1px, transparent 1px),\n  linear-gradient(90deg, rgba(100, 116, 139, 0.15) 1px, transparent 1px);\nbackground-size: 40px 40px;\nbackground-attachment: fixed;'
       },
       7: {
         name: '다크 그레이',
@@ -486,6 +820,52 @@
     };
 
     let currentBg = null;
+
+    // 배경 스타일 적용
+    function applyBackgroundStyle(option) {
+      const previewElements = [
+        'portfolioPreview',
+        'previewHeader',
+        'previewHero', 
+        'previewFeatured',
+        'previewAll',
+        'previewFooter'
+      ];
+
+      // 모든 요소에서 배경 클래스 제거
+      previewElements.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.remove('bg-1', 'bg-2', 'bg-3', 'bg-4', 'bg-5', 'bg-6', 'bg-7', 'bg-8');
+        }
+      });
+
+      // 선택된 배경 적용
+      const portfolioPreview = document.getElementById('portfolioPreview');
+      if (portfolioPreview) {
+        portfolioPreview.classList.add('bg-' + option);
+      }
+
+      // 카드 스타일 조정 (오피스 화이트일 때)
+      const cards = document.querySelectorAll('.preview-card');
+      if (option === 6) {
+        // 오피스 화이트 - 어두운 카드
+        cards.forEach(card => {
+          card.style.background = 'rgba(30, 41, 59, 0.9)';
+          card.style.borderColor = 'rgba(100, 116, 139, 0.3)';
+        });
+        document.getElementById('previewHeader').style.background = 'rgba(30, 41, 59, 0.95)';
+        document.getElementById('previewFooter').style.background = 'rgba(30, 41, 59, 0.9)';
+      } else {
+        // 다크 테마 - 밝은 카드
+        cards.forEach(card => {
+          card.style.background = 'rgba(30, 41, 59, 0.6)';
+          card.style.borderColor = 'rgba(51, 65, 85, 0.5)';
+        });
+        document.getElementById('previewHeader').style.background = 'rgba(30, 41, 59, 0.95)';
+        document.getElementById('previewFooter').style.background = 'rgba(30, 41, 59, 0.9)';
+      }
+    }
 
     function openPreview(option) {
       currentBg = option;
@@ -511,7 +891,7 @@
       document.querySelectorAll('.option-card').forEach(card => {
         card.classList.remove('selected');
       });
-      document.querySelector(`[data-bg="${option}"]`).classList.add('selected');
+      document.querySelector('[data-bg="' + option + '"]').classList.add('selected');
     }
 
     function closePreview() {
@@ -538,9 +918,31 @@
     function applyBg(option) {
       const css = bgData[option].css;
       navigator.clipboard.writeText(css).then(() => {
-        alert(`Option ${option} - ${bgData[option].name}\n\nCSS 가 클립보드에 복사되었습니다!\n\nPortfolio BaseLayout.astro 에 붙여넣으세요.`);
+        alert('Option ' + option + ' - ' + bgData[option].name + '\n\nCSS 가 클립보드에 복사되었습니다!\n\nPortfolio BaseLayout.astro 에 붙여넣으세요.');
       });
+      
+      // Apply to preview
+      applyBackgroundStyle(option);
+      closePreview();
     }
+
+    function selectLayout(option) {
+      document.querySelectorAll('.layout-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      event.currentTarget.classList.add('selected');
+      
+      if (option === 1) {
+        alert('Standard 레이아웃이 선택되었습니다.\n\n현재 포트폴리오에 적용된 레이아웃입니다.');
+      } else {
+        alert('Grid 레이아웃은 준비중입니다!');
+      }
+    }
+
+    // Initialize with first background
+    document.addEventListener('DOMContentLoaded', function() {
+      applyBackgroundStyle(1);
+    });
   </script>
 </body>
 </html>
